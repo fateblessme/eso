@@ -247,3 +247,14 @@ flutter build macos -v
 使用GPL_v3协议 [GPL_v3](LICENSE)
 
 
+软件打开之后内置是没有任何资源的，我们需要点击发现 » 导入规则
+
+然后复制以下任意一条链接，并进行导入：
+
+https://cdn.jsdelivr.net/gh/mabDc/eso_source/manifest
+
+https://gcore.jsdelivr.net/gh/mabDc/eso_source@master/manifest
+
+https://cdn.staticaly.com/gh/mabDc/eso_source/master/manifest
+
+
