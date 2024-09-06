@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:auto_orientation/auto_orientation.dart';
 import 'package:dlna/dlna.dart';
 import 'package:eso/database/history_item_manager.dart';
 import 'package:eso/menu/menu.dart';
@@ -22,6 +23,7 @@ import '../global.dart';
 import '../model/audio_service.dart';
 import '../utils.dart';
 import '../utils/dlna_util.dart';
+import 'audio_page_refactor.dart';
 import 'content_page_manager.dart';
 
 class VideoPage extends StatelessWidget {
@@ -560,7 +562,7 @@ class VideoPageProvider with ChangeNotifier, WidgetsBindingObserver {
         _aspectRatio = VideoAspectRatio.auto;
       }
       notifyListeners();
-      AudioService.stop();
+      audioHandler?.stop();
       await _controller.initialize();
       _controller.seekTo(Duration(milliseconds: searchItem.durContentIndex));
       _controller.play();
@@ -633,6 +635,7 @@ class VideoPageProvider with ChangeNotifier, WidgetsBindingObserver {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    AutoOrientation.portraitAutoMode();
   }
 
   void setHorizontal() {
@@ -640,6 +643,11 @@ class VideoPageProvider with ChangeNotifier, WidgetsBindingObserver {
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
     ]);
+    if (Platform.isAndroid) {
+      AutoOrientation.landscapeAutoMode(forceSensor: true);
+    } else {
+      AutoOrientation.landscapeAutoMode();
+    }
   }
 
   void setVertical() {
@@ -647,6 +655,11 @@ class VideoPageProvider with ChangeNotifier, WidgetsBindingObserver {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    if (Platform.isAndroid) {
+      AutoOrientation.portraitAutoMode(forceSensor: true);
+    } else {
+      AutoOrientation.portraitAutoMode();
+    }
   }
 
   void openDLNA(BuildContext context) {

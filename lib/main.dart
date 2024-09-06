@@ -17,6 +17,8 @@ import 'package:window_manager/window_manager.dart';
 import 'eso_theme.dart';
 import 'global.dart';
 import 'hive/theme_mode_box.dart';
+import 'model/audio_service_handler.dart';
+import 'page/audio_page_refactor.dart';
 import 'page/discover_page.dart';
 import 'page/home_page.dart';
 import 'package:hetu_script/hetu_script.dart';
@@ -92,7 +94,13 @@ void main() async {
         SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   }
   WidgetsFlutterBinding.ensureInitialized();
-
+  // if (!Platform.isWindows)
+  // await JustAudioBackground.init(
+  //   androidNotificationChannelId: 'com.eso.channel.audio',
+  //   androidNotificationChannelName: '亦搜音频',
+  //   androidNotificationOngoing: true,
+  //   androidNotificationIcon: 'mipmap/eso_logo',
+  // );
   if (Platform.isAndroid || Platform.isIOS) {
     final linkPath = await getInitialLink();
 

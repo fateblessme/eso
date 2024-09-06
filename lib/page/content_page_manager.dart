@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import 'audio_page_refactor.dart';
 import 'novel_more_page.dart';
 import 'novel_page_refactor.dart';
 
@@ -167,12 +168,12 @@ class ContentProvider with ChangeNotifier {
   }
 
   void changeChapter(int index) async {
-    if (searchItem.durChapterIndex != index) {
-      searchItem.durChapterIndex = index;
-      searchItem.durChapter = searchItem.chapters[index].name;
-      searchItem.durContentIndex = 1;
-      await searchItem.save();
-    }
+    // if (searchItem.durChapterIndex != index) {
+    //   searchItem.durChapterIndex = index;
+    //   searchItem.durChapter = searchItem.chapters[index].name;
+    //   searchItem.durContentIndex = 1;
+    //   await searchItem.save();
+    // }
     await HistoryItemManager.insertOrUpdateHistoryItem(searchItem);
   }
 }
